@@ -3,6 +3,7 @@
 Tentakit till kursen Digital Konstruktion/Digital Design @
 Chalmers. Alla bidrag till kitet mottages tacksamt!
 
+OBS! Tentakitet är på engelska eftersom kursen ges på engelska.
 
 ## Vad är ett tentakit?
 

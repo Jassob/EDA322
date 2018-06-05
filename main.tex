@@ -49,7 +49,14 @@ This exam kit is divided into three sections:
 \newpage
 
 \section{Theory}
-\subsection{Circuits}
+
+\subsection{Configurable and non-configurable hardware}
+There are different types of circuits and they come with their own set
+of advantages and disadvantages. In this course we make the
+distinction between reconfigurable hardware and non-reconfigurable
+hardware. The two main types of circuits discussed in the course is
+ASICs and FPGAs.
+
 \subsubsection{ASIC (Application Specific Integrated Circuit)}
 A non-reconfigurable circuit. The hardware of an ASIC can not be
 changed after production. The static, specialized nature of this kind
@@ -60,21 +67,27 @@ expensive to produce due to its high NRE\footnote{Non-recurring
 specific purpose is required (e.g. graphic card).
 
 \subsubsection{FPGA (Field Programmable Gate Array)}
-A configurable circuit. The hardware of an FPGA supports different
-designs. A design translates to a specific bitstream and thus by
-changing the configuration bitstream of an FPGA it is possible to
-reconfigure the functionality of an FPGA.
+A specific type of reconfigurable circuit that contains a lot of
+different circuit elements (for instance logic blocks, interconnects,
+RAM memory blocks, multipliers etc) and is configurable by a
+bitstream. This bitstream specifies how the circuit elements should
+behave and the way they are connected to each other. Therefore, by
+changing the configuration bitstream of an FPGA one can change the
+functionality of it, or reconfigure it.
 
-Compared to implementing circuit logic in ASICs, implementing it using
-an FPGA design would probably result in a lower NRE cost, but a higher
-power consumption and often lower performance. FPGAs are a good choice
-if the volume of circuits is not big enough to motivate the high cost
-of producing ASICs or if the flexibility of reconfiguration is
-valuable (for instance to fix hardware bugs in a system, or just
-re-use if a use case is not needed anymore).
+Compared to implementing circuit logic in ASICs, an FPGA design would
+probably result in higher power consumption and often lower
+performance, but since the chip is reconfigurable flaws in the design
+can be fixed by updating the design and loading it to the FPGA,
+resulting in a lower NRE cost (both in materials and time due to
+quicker ``verify-and-fix'' iterations). A common use of FPGAs is
+therefore to prototype a circuit design on an FPGA and then create
+ASICs when the design is final.
 
-A common use of FPGAs is to prototype a component design and test it
-on an FPGA and then create ASICs when the design is final.
+FPGAs are also good choice if the volume of circuits is not big enough
+to motivate the high cost of producing ASICs or if the flexibility of
+reconfiguration is valuable (for instance to fix hardware bugs in a
+system, or just re-use if a use case is not needed anymore).
 
 For more information of FPGAs and their applications, we refer to the
 wikipedia

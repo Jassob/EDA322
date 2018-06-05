@@ -49,6 +49,38 @@ This exam kit is divided into three sections:
 \newpage
 
 \section{Theory}
+\subsection{Circuits}
+\subsubsection{ASIC (Application Specific Integrated Circuit)}
+A non-reconfigurable circuit. The hardware of an ASIC can not be
+changed after production. The static, specialized nature of this kind
+of chips makes them energy-efficient and high-performing, but also
+expensive to produce due to its high NRE\footnote{Non-recurring
+  engineering, the one-time cost to research, design, develop and test
+  a product} cost. Viable if many chips of the same kind and a
+specific purpose is required (e.g. graphic card).
+
+\subsubsection{FPGA (Field Programmable Gate Array)}
+A configurable circuit. The hardware of an FPGA supports different
+designs. A design translates to a specific bitstream and thus by
+changing the configuration bitstream of a FPGA it is possible to
+reconfigure the design.
+
+Compared to implementing circuit logic in ASICs, implementing it using
+a FPGA design would probably result in a lower NRE cost, but a higher
+power consumption and often lower performance. FPGAs are a good choice
+if the volume of circuits is not big enough to motivate the high cost
+of producing ASICs or if the flexibility of reconfiguration is
+valuable (for instance to fix hardware bugs in a system, or just
+re-use if a use case is not needed anymore).
+
+A common use of FPGAs is to prototype a component design and test it
+on a FPGA and then create ASICs when the design is final.
+
+For more information of FPGAs and their applications, we refer to the
+wikipedia
+\href{https://en.wikipedia.org/wiki/Field-programmable_gate_array#Applications}{article}
+or section \ref{sec:rec-hw} which describes reconfigurable hardware in
+more detail.
 \section{Quiz}
 
 \end{document}

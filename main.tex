@@ -94,6 +94,94 @@ wikipedia
 \href{https://en.wikipedia.org/wiki/Field-programmable_gate_array#Applications}{article}
 or section \ref{sec:rec-hw} which describes reconfigurable hardware in
 more detail.
+
+\subsection{Adders}
+
+Adders are circuits that produce the sum of their input. The most
+basic of adders are the Half Adder (abbreviation HA) which can be used
+to add two 1-bit signals {\bf A} and {\bf B}. Implementation of a HA
+is shown in figure \ref{fig:ha}. {\bf S} and {\bf C} are two 1-bit
+output signals where {\bf S} is the 1-bit sum of {\bf A} and {\bf B}
+and {\bf C} is the carry that tells us if the addition overflowed (i.e
+{\bf A} and {\bf B} are both 1) or not.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{images/HA.pdf}
+  \caption{Implementation of a 1 bit Half adder. Gate-level diagram to
+    the left and a block diagram to the right. A and B are two 1-bit
+    input signals and S and C are two 1-bit output signals. C is used
+    to signal that an addition has overflowed, i.e if both A and B are
+    1.}
+  \label{fig:ha}
+\end{figure}
+
+
+If we want to add numbers represented by more bits than one we can
+chain multiple 1-bit adders together. But how do we know if the last
+addition overflowed or not? Simple, we'll just combine two half adders
+where one takes care of the result of {\bf A} + {\bf B} and the other
+takes care of the input carry (the overflow marker of last addition).
+This arrangement of two half adder is called a Full Adder
+(implementation is shown in figure \ref{fig:fa}) and still only sums
+single-bit signals, but due to the ``carry in''-signal we can chain it
+together to create multiple-bit adders.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{images/FA.pdf}
+  \caption{Implementation of a 1 bit Full Adder. Gate-level diagram to the left and a block diagram to the right.}
+  \label{fig:fa}
+\end{figure}
+
+Connecting two or more FAs by sending the carry out from the previous
+FA to the carry in on the current FA is called a Ripple Carry Adder
+(RCA) due to the way the carry ``ripples'' through the adders, from
+the least significant adder to the most significant adder.
+
+A simple 2-bit RCA is shown in figure \ref{fig:2fa}. The right-most
+part of figure \ref{fig:2fa} is commonly used in block-levels as FAs
+are common building blocks for building more complex adding circuits.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{images/2b-FA.pdf}
+  \caption{Implementation of a 2 bit Full Adder. Gate-level diagram to the left and a block diagram to the right.}
+  \label{fig:2fa}
+\end{figure}
+
+Since every FA in an RCA depends on the carry out of the previous FA
+no parallellisation is possible, the additions must be done in
+sequence. This poses a linear time delay that depends on the number of
+bits in the digits (or number of FAs). If we knew what the carry of
+the previous addition will be we could in that case start start our
+calculation before the previous calculation is completed {\it since
+  the current calculation only depends on the last carry}. One simple
+solution is to calculate two different versions of our sum, one where
+the carry is 1 and one where the carry is 0 and then when the actual
+carry is received we just select (with a MUX for instance) the correct
+sum and carry from our calculation.
+
+This is in fact the basis for the Carry-Select Adder (which is shown
+in figure \ref{fig:4csa}). A CSA is basically an RCA where some FAs are
+duplicated (they add the same input) but they are fed with a fixed
+carry. This has the benefit that every FA that is fed a fixed carry
+can start calculating at the same instance as the least significant FA
+in the CSA and then the successor of these FAs with fixed carries can
+continue doing their work. Essentially we've split up those parts in
+the RCA into two identical parts that just differs in the initial
+carry in. When the carry in arrives it selects which result the
+circuit should output.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=7cm]{images/4b-CSA.pdf}
+  \caption{An implementation of a 4 bit carry-select adder. Only block diagram is shown.}
+  \label{fig:4csa}
+\end{figure}
+
+\subsection{Multipliers}
+
 \section{Quiz}
 
 \end{document}

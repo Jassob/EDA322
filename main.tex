@@ -8,6 +8,8 @@
 \usepackage[includeheadfoot, top=1.0cm, bottom=2cm]{geometry}
 \usepackage{float, hyperref, graphicx, parskip, lastpage, todonotes}
 
+\newcommand{\enot}{¬}
+
 \begin{document}
 \maketitle
 \tableofcontents
@@ -49,6 +51,125 @@ This exam kit is divided into three sections:
 \newpage
 
 \chapter{Theory}
+
+\section{Boolean algebra}
+
+This section introduces different boolean algebra concepts that is
+used in the course. Basic familiarity with boolean algebra concepts
+(i.e.\ the connectives \texttt{AND}, \texttt{OR} and \texttt{\enot}
+(\texttt{NOT})) and the
+\href{https://en.wikipedia.org/wiki/De\_Morgan\%27s\_laws}{De Morgan's
+  law} is assumed.
+
+\textbf{Conventions}: \autoref{tab:boolean-conventions} explains how
+we will write terms.
+
+\begin{table}
+  \centering
+  \begin{tabular}{c | l l}
+    \textbf{Connective} & \multicolumn{2}{c}{\textbf{Terms} (both \texttt{p} and \texttt{q} are boolean terms)} \\ \hline
+    \texttt{AND} & \hspace{1em}\texttt{pq} & \hspace{1em}\texttt{(p + q)(q + p)}\\
+    \texttt{OR}  & \hspace{1em}\texttt{p + q} & \hspace{1em}\texttt{pq + qp} \\
+    \texttt{NOT} & \hspace{1em}\texttt{\enot{p}} & \hspace{1em}\texttt{\enot{(pq + (p + q)}}\\
+  \end{tabular}
+  \caption[Conventions --- boolean terms]{Conventions used in this exam kit for writing boolean terms.}
+  \label{tab:boolean-conventions}
+\end{table}
+
+\subsection{Sum terms and product terms}
+
+Sum terms are compound boolean terms whose inner terms are
+\texttt{OR}'d together. Some examples can be seen in
+\autoref{tab:sums}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c | c}
+    \textbf{Examples of sums} & \textbf{Not examples of sums} \\ \hline
+    \texttt{a+b+c}      & \texttt{ab} \\
+    \texttt{\enot{a}+b} & \texttt{ab + c}
+  \end{tabular}
+  \caption[Examples of sum terms]{Examples and counterexamples of sum
+    terms}%
+\label{tab:sums}
+\end{table}
+
+Product terms are compound boolean terms whose inner terms are
+\texttt{AND}'d together. Some examples can be seen in
+\autoref{tab:prods}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c | c}
+    \textbf{Examples of products} & \textbf{Not examples of products} \\ \hline
+    \texttt{abc}      & \texttt{a+b} \\
+    \texttt{\enot{a}b} & \texttt{(a+b)c}
+  \end{tabular}
+  \caption[Example of product terms]{Examples and counterexamples of
+    product terms}%
+  \label{tab:prods}
+\end{table}
+
+\subsection{Maxterms and minterms}
+
+Maxterms are sum terms that contain all inputs to a boolean function
+either in complemented or in uncomplemented form.
+
+Minterms are product terms that contain all inputs to a boolean
+function either in complemented or in uncomplemented form.
+
+\textbf{Example}: Consider a boolean function \texttt{f(a,b)}, such a
+function has two inputs, namely \texttt{a} and \texttt{b}. A maxterm
+(or minterm) to \texttt{f} must therefore be a sum (or product) that
+contains either \texttt{a}, \texttt{b}, \texttt{\enot{a}} or
+\texttt{\enot{b}}.
+
+For instance \texttt{a+\enot{b}} is a maxterm, but \texttt{a+\enot{a}}
+is not. Likewise \texttt{a(\enot{b})} is a minterm, but not
+\texttt{a(\enot{a})}.
+
+\subsection{PoS and SoP}
+
+PoS is an acronym for \textit{Product of Sums}, which actually is as
+simple as it sounds. Any compound boolean term that is a bunch of
+\texttt{OR}'d terms which are then \texttt{AND}'d together is a
+product of sums.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l | l}
+    \textbf{Examples of PoS} & \textbf{Counterexamples of PoS} \\ \hline
+    \texttt{(a+b+c)(\enot{a}+b)}           & \texttt{abc+\enot{a}bc} \\
+    \texttt{(a+b)(\enot{a}+b)(a+\enot{b})} & \texttt{abc} --- No sums \\
+    \texttt{(a+b)(b+c)(c+d)}               & \texttt{a+b} --- No products
+  \end{tabular}
+  \caption[Example of PoS]{Examples and counterexamples of products of sums}%
+  \label{tab:pos}
+\end{table}
+
+SoP is the opposite of a PoS, namely a \textit{Sum of Products}. Here
+the innermost compound boolean terms are \texttt{AND}'d together and
+then \texttt{OR}'d.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{l | l}
+    \textbf{Examples of PoS} & \textbf{Counterexamples of PoS} \\ \hline
+    \texttt{abc+\enot{a}bc}                    & \texttt{(a+b+c)(\enot{a}+b)} \\
+    \texttt{ab+(a\enot{b})+(\enot{a}\enot{b})} & \texttt{ab} --- No sums \\
+    \texttt{ab+bc+cd}                          & \texttt{a+b} --- No products
+  \end{tabular}
+  \caption[Example of PoS]{Examples and counterexamples of products of sums}%
+  \label{tab:pos}
+\end{table}
+
+\subsection{Canonical forms}
+
+Canonical Disjunctive Normal Form (which is a SoP of minterms) and
+Canonical Conjunctive Normal Form (which is a PoS of
+maxterms).\todo{Elaborate and explain.}
+
+\newpage
 
 \section{Configurable and non-configurable hardware}
 There are different types of circuits and they come with their own set

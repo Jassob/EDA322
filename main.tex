@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper,11pt]{report}
 
 \title{EDA322 Digital Design -- Exam kit \\
   \small Revision: 1 (2018-06) -- Taube \& Jassob
@@ -6,7 +6,7 @@
 }
 
 \usepackage[includeheadfoot, top=1.0cm, bottom=2cm]{geometry}
-\usepackage{hyperref, graphicx, parskip, lastpage}
+\usepackage{float, hyperref, graphicx, parskip, lastpage, todonotes}
 
 \begin{document}
 \maketitle
@@ -14,7 +14,7 @@
 
 \newpage
 
-\section{Introduction}
+\chapter{Introduction}
 This is an exam kit for the course Digital Design given at Chalmers
 University of Technology to second-year student on the Computer
 Science and Engineering program.
@@ -25,8 +25,8 @@ Computer Science and Engineering department.
 The course is at the time of writing (2018) given in English and
 therefore this exam kit is also written in English.
 
-\subsection{Motivation}
-Digital Design is a course that covers {\it a lot} and since there
+\section{Motivation}
+Digital Design is a course that covers \textit{a lot} and since there
 usually are not very good answers to old exams it can be a difficult
 course to retake if one does not attend every lecture.
 
@@ -34,7 +34,7 @@ This exam kit attempts to make it easier to study the course without
 the aid of the lectures by including more thorough explanations and,
 when needed, visualizing such explanations with step-by-step pictures.
 
-\subsection{Structure}
+\section{Structure}
 
 This exam kit is divided into three sections:
 \begin{itemize}
@@ -48,16 +48,16 @@ This exam kit is divided into three sections:
 
 \newpage
 
-\section{Theory}
+\chapter{Theory}
 
-\subsection{Configurable and non-configurable hardware}
+\section{Configurable and non-configurable hardware}
 There are different types of circuits and they come with their own set
 of advantages and disadvantages. In this course we make the
 distinction between reconfigurable hardware and non-reconfigurable
 hardware. The two main types of circuits discussed in the course is
 ASICs and FPGAs.
 
-\subsubsection{ASIC (Application Specific Integrated Circuit)}
+\subsection{ASIC (Application Specific Integrated Circuit)}
 A non-reconfigurable circuit. The hardware of an ASIC can not be
 changed after production. The static, specialized nature of this kind
 of chips makes them energy-efficient and high-performing, but also
@@ -66,7 +66,7 @@ expensive to produce due to its high NRE\footnote{Non-recurring
   a product} cost. Viable if many chips of the same kind and a
 specific purpose is required (e.g. graphic card).
 
-\subsubsection{FPGA (Field Programmable Gate Array)}
+\subsection{FPGA (Field Programmable Gate Array)}
 A specific type of reconfigurable circuit that contains a lot of
 different circuit elements (for instance logic blocks, interconnects,
 RAM memory blocks, multipliers etc) and is configurable by a
@@ -92,20 +92,25 @@ system, or just re-use if a use case is not needed anymore).
 For more information of FPGAs and their applications, we refer to the
 wikipedia
 \href{https://en.wikipedia.org/wiki/Field-programmable_gate_array#Applications}{article}
-or section \ref{sec:rec-hw} which describes reconfigurable hardware in
-more detail.
+or \autoref{sec:rec-hw}\todo[author=Jassob,fancyline]{Write this
+  section}, which describes reconfigurable hardware in more detail.
 
-\subsection{Adders}
+\newpage
+\section{Adders}
 
-Adders are circuits that produce the sum of their input. The most
-basic of adders are the Half Adder (abbreviation HA) which can be used
-to add two 1-bit signals {\bf A} and {\bf B}. Implementation of a HA
-is shown in figure \ref{fig:ha}. {\bf S} and {\bf C} are two 1-bit
-output signals where {\bf S} is the 1-bit sum of {\bf A} and {\bf B}
-and {\bf C} is the carry that tells us if the addition overflowed (i.e
-{\bf A} and {\bf B} are both 1) or not.
+Adders are circuits that produce the sum of their input.
 
-\begin{figure}[ht]
+\subsection{Half adders}
+
+The most basic of adders are the Half Adder (abbreviation HA) which
+can be used to add two 1-bit signals \textbf{A} and
+\textbf{B}. Implementation of a HA is shown in
+\autoref{fig:ha}. \textbf{S} and \textbf{C} are two 1-bit output
+signals where \textbf{S} is the 1-bit sum of \textbf{A} and \textbf{B}
+and \textbf{C} is the carry that tells us if the addition overflowed
+(i.e \textbf{A} and \textbf{B} are both 1) or not.
+
+\begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{images/HA.pdf}
   \caption{Implementation of a 1 bit Half adder. Gate-level diagram to
@@ -116,23 +121,26 @@ and {\bf C} is the carry that tells us if the addition overflowed (i.e
   \label{fig:ha}
 \end{figure}
 
+\subsection{Full adders}
 
 If we want to add numbers represented by more bits than one we can
 chain multiple 1-bit adders together. But how do we know if the last
 addition overflowed or not? Simple, we'll just combine two half adders
-where one takes care of the result of {\bf A} + {\bf B} and the other
-takes care of the input carry (the overflow marker of last addition).
-This arrangement of two half adder is called a Full Adder
+where one takes care of the result of \textbf{A} + \textbf{B} and the
+other takes care of the input carry (the overflow marker of last
+addition).  This arrangement of two half adder is called a Full Adder
 (implementation is shown in figure \ref{fig:fa}) and still only sums
 single-bit signals, but due to the ``carry in''-signal we can chain it
 together to create multiple-bit adders.
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{images/FA.pdf}
   \caption{Implementation of a 1 bit Full Adder. Gate-level diagram to the left and a block diagram to the right.}
   \label{fig:fa}
 \end{figure}
+
+\subsection{Ripple carry adders}
 
 Connecting two or more FAs by sending the carry out from the previous
 FA to the carry in on the current FA is called a Ripple Carry Adder
@@ -143,9 +151,9 @@ A simple 2-bit RCA is shown in figure \ref{fig:2fa}. The right-most
 part of figure \ref{fig:2fa} is commonly used in block-levels as FAs
 are common building blocks for building more complex adding circuits.
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{images/2b-FA.pdf}
+  \includegraphics[width=.8\textwidth,trim={0 10cm 0 10cm}]{images/2b-FA.pdf}
   \caption{Implementation of a 2 bit Full Adder. Gate-level diagram to the left and a block diagram to the right.}
   \label{fig:2fa}
 \end{figure}
@@ -155,15 +163,24 @@ no parallellisation is possible, the additions must be done in
 sequence. This poses a linear time delay that depends on the number of
 bits in the digits (or number of FAs). If we knew what the carry of
 the previous addition will be we could in that case start start our
-calculation before the previous calculation is completed {\it since
+calculation before the previous calculation is completed \textit{since
   the current calculation only depends on the last carry}. One simple
 solution is to calculate two different versions of our sum, one where
 the carry is 1 and one where the carry is 0 and then when the actual
 carry is received we just select (with a MUX for instance) the correct
 sum and carry from our calculation.
 
+\subsection{Carry-select adders}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.7\textwidth, trim={0 5cm 0 5cm}]{images/4b-CSA.pdf}
+  \caption{An implementation of a 4 bit carry-select adder. Only block diagram is shown.}
+  \label{fig:4csa}
+\end{figure}
+
 This is in fact the basis for the Carry-Select Adder (which is shown
-in figure \ref{fig:4csa}). A CSA is basically an RCA where some FAs are
+in \autoref{fig:4csa}). A CSA is basically an RCA where some FAs are
 duplicated (they add the same input) but they are fed with a fixed
 carry. This has the benefit that every FA that is fed a fixed carry
 can start calculating at the same instance as the least significant FA
@@ -173,15 +190,8 @@ the RCA into two identical parts that just differs in the initial
 carry in. When the carry in arrives it selects which result the
 circuit should output.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=7cm]{images/4b-CSA.pdf}
-  \caption{An implementation of a 4 bit carry-select adder. Only block diagram is shown.}
-  \label{fig:4csa}
-\end{figure}
+\section{Multipliers}
 
-\subsection{Multipliers}
-
-\section{Quiz}
+\chapter{Quiz}
 
 \end{document}

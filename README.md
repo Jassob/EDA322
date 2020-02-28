@@ -12,6 +12,8 @@ förklarande facit och annan hjälpsamt innehåll. Du kan använda det
 som facit när du gör övningar eller gamla tentor eller som en
 refresher för att kontrollera att du kan det du behöver inför tentan.
 
+Det ersätter inte föreläsningarna.
+
 ## Hur hjälper jag till?
 
 **Alternativ 1**: Forka det här repot till dig, gör dina ändringar och
